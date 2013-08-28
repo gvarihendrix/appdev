@@ -1,106 +1,40 @@
 @import "compass/css3";
-
-.container {
-  bottom: 0;
-  left: 20px;
-  height: 600px;
-  overflow: hidden;
-  position: absolute;
-  right: 0;
-  top: 10px;
-  border: 1px solid black;
-}
+@import "_animation";
 
 
 .game {
+  left: 50%;
+  top: 50%;
+  width: 800px;
   height: 600px;
-  display: block;
-  border: 1px solid black;
-  background: url('http://i.imgur.com/Y0BMP.png')  top left;
-}
-
-.game img {
-  display: block;
-}
-
-img {
-  display: none;
-}
-
-.player {
+  margin-left: -400px;
+  margin-top: -300px;
+  overflow: hidden;
   position: absolute;
-  left: 100px;
-  top: 599px;
-  width: 68px;
-  height: 81px;
-  margin-left: -34px;
-  margin-top: -81px;
-
-  div {margin: 0; padding: 0;}
-  div div {background: #A4CA39; position: relative;}
-
-  .android {
-    height: 402px; width: 278px;
-    margin-left: 12px;
-
-    @include transform-origin(0, 0);
-    @include transform(scale(0.20, 0.20));
-  }
-
-  .head {
-    width: 220px; height: 100px;
-    top: 32px;
-
-    @include border-radius(110px 110px 0 0);
-
-    @include transition(all 0.1s ease-in);
-  }
-  .l_eye, .r_eye {
-    background: #fff;
-    width: 20px; height: 20px;
-    position: absolute; top: 42px;
-
-    @include border-radius(10px);
-  }
-  .l_eye {left: 50px;}
-  .r_eye {right: 50px;}
-
-  .l_ant, .r_ant{
-    width: 6px; height: 50px;
-    position: absolute; top: -34px;
-
-    @include border-radius(3px);
-  }
-  .l_ant {
-    left: 50px;
-    @include transform(rotate(-30deg));
-  }
-  .r_ant {
-    right: 50px;
-    @include transform(rotate(30deg));
-  }
-
-  .body{
-    width: 220px; height: 184px;
-    top: 40px;
-
-    @include border-radius(0 0 25px 25px);
-  }
-
-  .l_arm, .r_arm, .l_leg, .r_leg {
-    width: 50px; position: absolute;
-    @include transition(all 0.1s ease-in);
-  }
-  .l_arm, .r_arm {
-    height: 150px;
-    @include border-radius(25px);
-  }
-  .l_leg, .r_leg {
-    height: 80px; top: 182px;
-    @include border-radius(0 0 25px 25px);
-  }
-  .l_arm {left: -58px;}
-  .r_arm {right: -58px;}
-  .l_leg {left: 45px;}
-  .r_leg {right: 45px;}
 }
+
+.world {
+  position: absolute;
+  width: 5000px;
+  height: 1000px;
+}
+
+.background {
+  background: url('http://assets.sbnation.com/assets/1608607/Screen_Shot_2012-08-06_at_12.23.43_PM.jpeg');
+  position: absolute;
+  height: 479px;
+  width: 3000px;
+}
+
+.enemy {
+  position: absolute;
+  height: 75px;
+  width: 65px;
+  left: 0;
+  top: 0;
+  background: url('http://pulsaro.com/wp-content/uploads/2012/04/enemy-concept.jpg') 50% 50% / contain no-repeat;
+}
+
+
+@import "_player";
+@import "_platform";

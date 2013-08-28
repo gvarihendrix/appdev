@@ -18,26 +18,31 @@
     <body>
     <div class="container">
         <div class="game">
-            <div class="player">
-                <div class="android">
-                    <div class="head">
-                        <div class="l_ant"></div>
-                        <div class="r_ant"></div>
-                        <div class="l_eye"></div>
-                        <div class="r_eye"></div>
-                    </div>
-                    <div class="body">
-                        <div class="l_arm"></div>
-                        <div class="r_arm"></div>
-                        <div class="l_leg"></div>
-                        <div class="r_leg"></div>
-                    </div>
+            <div class="world">
+                <div class="background">
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <img id="platform" src="http://i.imgur.com/2WEhF.png" />
+                <div class="platforms">
+                </div>
+                <div class="entities"> </div>
+                <div class="player">
+                    <div class="android">
+                        <div class="head">
+                            <div class="l_ant"></div>
+                            <div class="r_ant"></div>
+                            <div class="l_eye"></div>
+                            <div class="r_eye"></div>
+                        </div>
+                        <div class="body">
+                            <div class="l_arm"></div>
+                            <div class="r_arm"></div>
+                            <div class="l_leg"></div>
+                            <div class="r_leg"></div>
+                        </div>
+                    </div>
+                </div> <!-- End player -->
+            </div> <!-- End World -->
+        </div> <!-- End game -->
+    </div> <!-- End container -->
     <!-- build:js scripts/app.js -->
     <script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
     <!-- endbuild -->
