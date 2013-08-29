@@ -25,10 +25,12 @@ define(['controls'], function(controls) {
     Player.prototype.reset = function() {
         this.pos = { x: 200, y: 400 };
         this.vel = { x: 0, y: 0 };
+        this.isMovingLeft = false;
+        this.isMovingRight = true;
     };
 
     Player.prototype.checkGameOver = function() {
-        if (this.pos.y > HELL_Y) {
+        if (this.pos.y > this.game.viewport.y + this.game.height + 20) {
             this.game.gameOver();
         }
     };
@@ -100,7 +102,7 @@ define(['controls'], function(controls) {
 
         this.checkPlatforms(oldY);
         this.checkEnemies();
-        //this.checkGameOver();
+        this.checkGameOver();
 
         // Update UI
         this.el.css('transform', 'translate3d(' + this.pos.x + 'px,' + this.pos.y + 'px,0)');

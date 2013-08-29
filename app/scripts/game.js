@@ -82,9 +82,6 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
         });
 
         this.backgroundEl.css('transform', 'translate3d(' + this.viewport.x + 'px,' + this.viewport.y + 'px,0)');
-        console.log(this.viewport.y  + ' : ' + player_y +
-            ' : ' + this.elevation + ' : '+ min_y);
-        //this.morePLatforms();
     };
 
 
