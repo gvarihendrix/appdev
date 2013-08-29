@@ -18,6 +18,8 @@ define(['controls'], function(controls) {
         this.game = game;
         this.pos = { x: 200, y: 400 };
         this.vel = { x: 0, y: 0 };
+        this.isMovingLeft = false;
+        this.isMovingRight = true;
     };
 
     Player.prototype.reset = function() {
@@ -39,7 +41,7 @@ define(['controls'], function(controls) {
             if (plat.rect.y >= oldY && plat.rect.y < that.pos.y) {
 
                 // Are we inside X bounds.
-                if (that.pos.x + PLAYER_HALF_WIDTH >= plat.rect.x -20 &&
+                if (that.pos.x + PLAYER_HALF_WIDTH >= plat.rect.x  &&
                     that.pos.x - PLAYER_HALF_WIDTH <= plat.rect.right) {
                     // COLLISION. Lets stop gravitiy.
                     that.pos.y = plat.rect.y;
@@ -73,8 +75,12 @@ define(['controls'], function(controls) {
         // Player input
         if (controls.keys.right) {
             this.vel.x = PLAYER_SPEED;
+            this.isMovingRight = true;
+            this.isMovingLeft = false;
         } else if (controls.keys.left) {
             this.vel.x = -PLAYER_SPEED;
+            this.isMovingRight = false;
+            this.isMovingLeft = true;
         } else {
             this.vel.x = 0;
         }
@@ -100,6 +106,8 @@ define(['controls'], function(controls) {
         this.el.css('transform', 'translate3d(' + this.pos.x + 'px,' + this.pos.y + 'px,0)');
         this.el.toggleClass('jumping', this.vel.y < 0);
         this.el.toggleClass('walking', this.vel.x !== 0);
+        this.el.toggleClass('right', this.isMovingRight);
+        this.el.toggleClass('left', this.isMovingLeft);
     };
 
     return Player;

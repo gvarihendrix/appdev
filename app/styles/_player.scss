@@ -2,14 +2,22 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 92px;
-  height: 110px;
+  width: 110px;
+  height: 82px;
   margin-left: -34px;
   margin-top: -81px;
-
+  background: url('../images/sprites.png');
   div {margin: 0; padding: 0;}
   div div {background: #A4CA39; position: relative;}
 
+}
+
+.left {
+  background-position: 0px -201px;
+}
+
+.right {
+  background-position: 0px -121px;
 }
 
 @include keyframes(player-walk-left) {
