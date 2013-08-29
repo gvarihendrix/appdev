@@ -80,14 +80,14 @@ define(['controls'], function(controls) {
         }
 
         // Jumping
-        if (controls.keys.space && this.vel.y === 0) {
+        if (this.vel.y === 0) {
             this.vel.y = -JUMP_VELOCITY;
         }
 
         // Gravity
         this.vel.y += GRAVITY * delta;
 
-        var oldY =this.pos.y;
+        var oldY = this.pos.y;
 
         this.pos.x += delta * this.vel.x;
         this.pos.y += delta * this.vel.y;
