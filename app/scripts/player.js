@@ -6,7 +6,7 @@ define(['controls'], function(controls) {
         JUMP_VELOCITY = 1300,
         GRAVITY = 4000,
         PLAYER_HALF_WIDTH = 14,
-        PLAYER_RADIUS = 30,
+        PLAYER_RADIUS = 40,
         HELL_Y = 500;
 
     /**
@@ -43,8 +43,8 @@ define(['controls'], function(controls) {
             if (plat.rect.y >= oldY && plat.rect.y < that.pos.y) {
 
                 // Are we inside X bounds.
-                if (that.pos.x + PLAYER_HALF_WIDTH >= plat.rect.x  &&
-                    that.pos.x - PLAYER_HALF_WIDTH <= plat.rect.right) {
+                if (that.pos.x + PLAYER_HALF_WIDTH >= plat.rect.x -25 &&
+                    that.pos.x - PLAYER_HALF_WIDTH <= plat.rect.right -25) {
                     // COLLISION. Lets stop gravitiy.
                     that.pos.y = plat.rect.y;
                     that.vel.y = 0;

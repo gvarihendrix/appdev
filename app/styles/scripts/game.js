@@ -49,6 +49,7 @@ define(['player', 'platform'], function(Player, Platform) {
         // Update viewport if needed
         if (player_x < min_x) {
             this.viewport.x = player_x - VIEWPORT_PADDING;
+            this.gameOver();
         } else if(player_x > max_x) {
             this.viewport.x = player_x - this.viewport.width + VIEWPORT_PADDING;
         }
