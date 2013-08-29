@@ -15,7 +15,7 @@ define(function() {
     FloatingEnemy.prototype.onFrame = function(delta) {
         this.current = (this.current + delta) % this.duration;
 
-        var relPosition = Math.sin((Math.PI * 2) * (this.current / this.duration)) / 2 + 0.5;
+        var relPosition = Math.sin((Math.PI * 3) * (this.current / this.duration)) / 0.8 + 0.9;
 
         this.pos.x = this.start.x + (this.end.x - this.start.x) * relPosition;
         this.pos.y = this.start.y + (this.end.y - this.start.y) * relPosition;

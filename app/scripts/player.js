@@ -39,7 +39,7 @@ define(['controls'], function(controls) {
             if (plat.rect.y >= oldY && plat.rect.y < that.pos.y) {
 
                 // Are we inside X bounds.
-                if (that.pos.x + PLAYER_HALF_WIDTH >= plat.rect.x &&
+                if (that.pos.x + PLAYER_HALF_WIDTH >= plat.rect.x -20 &&
                     that.pos.x - PLAYER_HALF_WIDTH <= plat.rect.right) {
                     // COLLISION. Lets stop gravitiy.
                     that.pos.y = plat.rect.y;
