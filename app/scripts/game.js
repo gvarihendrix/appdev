@@ -28,6 +28,7 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
         this.isPlaying = false;
         // Cache a bound onFrame since we need it each frame.
         this.onFrame = this.onFrame.bind(this);
+
     };
 
   /**
