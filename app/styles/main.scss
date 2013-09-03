@@ -38,5 +38,13 @@
 }
 
 
+#score {
+  position: absolute;
+  height: 50px;
+  width: 100px;
+  left: 0px;
+  top: 0px;
+}
+
 @import "_player";
 @import "_platform";

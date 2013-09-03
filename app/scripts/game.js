@@ -2,7 +2,7 @@
 
 define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
     'use strict';
-    var VIEWPORT_PADDING = 300,
+    var VIEWPORT_PADDING = 100,
         PLATFORM_WIDHT = 80,
         POSITION = 418;
     /**
@@ -17,10 +17,12 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
         this.platforms = [];
         this.visiblePLatforms = 15;
         this.elevation = 0;
+        this.score = 0;
         this.backgroundEl = el.find('.background');
         this.platformsEl = el.find('.platforms');
         this.worldEl = el.find('.world');
         this.entitiesEl = el.find('.entities');
+        this.scoreEl = el.find('#score');
         this.width = this.el.width();
         this.height = this.el.height();
         this.isPlaying = false;
@@ -70,6 +72,7 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
 
         if (player_y < min_y) {
             this.viewport.y = player_y -  VIEWPORT_PADDING;
+            this.updateScore();
         }
 
         this.worldEl.css({
@@ -78,6 +81,12 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
         });
         this.morePlatforms(player_y, this.viewport.y);
         this.backgroundEl.css('transform', 'translate3d(' + this.viewport.x + 'px,' + this.viewport.y + 'px,0)');
+    };
+
+    Game.prototype.updateScore = function() {
+        console.log(this.score);
+        this.score++;
+        this.scoreEl.html('Score: ' + this.score + '!');
     };
 
     Game.prototype.morePlatforms = function(player_y, min_y) {
@@ -137,6 +146,8 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
    */
     Game.prototype.start = function() {
         // Restart the onFrame loop
+        this.score = 0;
+        this.scoreEl.html('Score: 0');
         this.player.reset();
         this.entities.forEach(function(e) { e.el.remove(); });
         this.platforms.forEach(function(p) { p.el.remove(); });
