@@ -33,6 +33,7 @@ define([], function() {
     if (e.keyCode in KEYS) {
       var keyName = KEYS[e.keyCode];
       this.keys[keyName] = false;
+      return false;
     }
   };
   // Export singleton.

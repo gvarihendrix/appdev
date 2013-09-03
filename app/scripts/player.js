@@ -3,7 +3,7 @@
 define(['controls'], function(controls) {
     'use strict';
     var PLAYER_SPEED = 400,
-        JUMP_VELOCITY = 1300,
+        JUMP_VELOCITY = 1500,
         GRAVITY = 4000,
         PLAYER_HALF_WIDTH = 14,
         PLAYER_RADIUS = 40,
@@ -20,6 +20,8 @@ define(['controls'], function(controls) {
         this.vel = { x: 0, y: 0 };
         this.isMovingLeft = false;
         this.isMovingRight = true;
+        this.width = this.el.width();
+        this.height = this.el.height();
     };
 
     Player.prototype.reset = function() {
@@ -35,6 +37,15 @@ define(['controls'], function(controls) {
         }
     };
 
+
+    Player.prototype.checkOutOfBounds = function() {
+        if (this.pos.x > this.game.width + this.width) {
+            this.pos.x = this.width;
+        } else if (this.pos.x < (140 - this.width)) {
+            this.pos.x = this.game.width + this.width;
+        }
+    };
+
     Player.prototype.checkPlatforms = function(oldY) {
         var that = this;
 
@@ -43,8 +54,8 @@ define(['controls'], function(controls) {
             if (plat.rect.y >= oldY && plat.rect.y < that.pos.y) {
 
                 // Are we inside X bounds.
-                if (that.pos.x + PLAYER_HALF_WIDTH >= plat.rect.x -25 &&
-                    that.pos.x - PLAYER_HALF_WIDTH <= plat.rect.right -25) {
+                if (that.pos.x + PLAYER_HALF_WIDTH >= plat.rect.x  &&
+                    that.pos.x - PLAYER_HALF_WIDTH <= plat.rect.right) {
                     // COLLISION. Lets stop gravitiy.
                     that.pos.y = plat.rect.y;
                     that.vel.y = 0;
@@ -103,6 +114,7 @@ define(['controls'], function(controls) {
         this.checkPlatforms(oldY);
         this.checkEnemies();
         this.checkGameOver();
+        this.checkOutOfBounds();
 
         // Update UI
         this.el.css('transform', 'translate3d(' + this.pos.x + 'px,' + this.pos.y + 'px,0)');
