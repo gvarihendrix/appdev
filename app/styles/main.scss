@@ -41,9 +41,11 @@
 #score {
   position: absolute;
   height: 50px;
-  width: 100px;
+  width: 150px;
   left: 0px;
   top: 0px;
+  font-family: "Berlin Sans FB", "Courier New";
+  font-size: 25px;
 }
 
 @import "_player";
