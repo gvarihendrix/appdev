@@ -42,8 +42,11 @@
   position: absolute;
   height: 50px;
   width: 100px;
-  left: 0px;
-  top: 0px;
+  left: 650px;
+  top: 10px;
+  font-style: bold;
+  font-size: 1.3em;
+  font-family: "monospace", serif;
 }
 
 @import "_player";

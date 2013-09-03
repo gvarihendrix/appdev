@@ -15,7 +15,7 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
         this.player = new Player(this.el.find('.player'), this);
         this.entities = [];
         this.platforms = [];
-        this.visiblePLatforms = 15;
+        this.visiblePLatforms = 20;
         this.elevation = 0;
         this.score = 0;
         this.backgroundEl = el.find('.background');
@@ -84,7 +84,6 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
     };
 
     Game.prototype.updateScore = function() {
-        console.log(this.score);
         this.score++;
         this.scoreEl.html('Score: ' + this.score + '!');
     };
@@ -93,8 +92,8 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
         var that = this;
         this.forEachPlatform(function(p, i) {
             if (p.rect.y > min_y + (that.height + 100)) {
-                p.rect.y = min_y;
-                p.rect.x = Math.random() * (that.width - PLATFORM_WIDHT);
+                p.rect.y = min_y - 10;
+                p.rect.x = Math.random() * (that.width);
                 p.rect.width = PLATFORM_WIDHT;
                 p.rect.height = p.rect.height;
                 p.rect.right = p.rect.x + p.rect.width;
@@ -109,7 +108,6 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
 
                 that.platforms[i] = p;
                 that.platformsEl.append(p.el);
-                console.log('Just created a new platform');
             }
         });
     };
@@ -172,32 +170,11 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
         }));
 
 
-        this.addPlatform(new Platform({
-            x: Math.random() * this.width,
-            y: 250,
-            width: PLATFORM_WIDHT,
-            height: 10
-        }));
-
-        this.addPlatform(new Platform({
-            x: 440,
-            y: 100,
-            width: PLATFORM_WIDHT,
-            height: 10
-        }));
-
-
-        this.addPlatform(new Platform({
-            x: (Math.random() * this.width),
-            y: 140,
-            width: PLATFORM_WIDHT,
-            height: 10
-        }));
         // TODO: need to implement a better algorithm
         for (var i = 0; i < this.visiblePLatforms; i += 1) {
             this.addPlatform(new Platform({
                 x: Math.random() * (this.viewport.width) + 100,
-                y: (Math.random() * (-this.el.height() * 2)) + (Math.random() * 800),
+                y: ((Math.random()) * (this.viewport.height - 1)) - 100,
                 width: PLATFORM_WIDHT,
                 height: 12
             }));
