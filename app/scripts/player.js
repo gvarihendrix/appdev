@@ -22,6 +22,7 @@ define(['controls'], function(controls) {
         this.isMovingRight = true;
         this.width = this.el.width();
         this.height = this.el.height();
+        controls.on('jump', this.onJump.bind(this));
     };
 
     Player.prototype.reset = function() {
@@ -84,24 +85,27 @@ define(['controls'], function(controls) {
         });
     };
 
-    Player.prototype.onFrame = function(delta) {
-        // Player input
-        if (controls.keys.right) {
-            this.vel.x = PLAYER_SPEED;
-            this.isMovingRight = true;
-            this.isMovingLeft = false;
-        } else if (controls.keys.left) {
-            this.vel.x = -PLAYER_SPEED;
-            this.isMovingRight = false;
-            this.isMovingLeft = true;
-        } else {
-            this.vel.x = 0;
-        }
-
-        // Jumping
+     Player.prototype.onJump = function() {
+    // Jumping
         if (this.vel.y === 0) {
             this.vel.y = -JUMP_VELOCITY;
         }
+    };
+
+    Player.prototype.onFrame = function(delta) {
+        // Player input
+        this.vel.x = controls.inputVec.x * PLAYER_SPEED;
+
+        if (controls.keys.right || controls.inputVec.x > 0) {
+            this.isMovingRight = true;
+            this.isMovingLeft = false;
+        }   else if (controls.keys.left || controls.inputVec.x < 0) {
+            this.isMovingLeft = true;
+            this.isMovingRight = false;
+        }
+
+        // Jumping
+        this.onJump();
 
         // Gravity
         this.vel.y += GRAVITY * delta;

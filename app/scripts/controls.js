@@ -2,40 +2,86 @@
 
 define([], function() {
 
-  var KEYS = {
-    37: 'left',
-    38: 'up',
-    39: 'right',
-    40: 'down'
+    var KEYS = {
+        37: 'left',
+        38: 'up',
+        39: 'right',
+        40: 'down'
+    },
+    FULL_ANGLE = 20;
+      /**
+       * Controls singleton class.
+       * @constructor
+       */
+    var Controls = function() {
+        this.keys = {};
+        this.inputVec = { x: 0, y: 0};
+        this.tilt = 0;
+
+        $(window)
+            .on('keydown', this.onKeyDown.bind(this))
+            .on('keyup', this.onKeyUp.bind(this))
+            .on('deviceorientation', this.onOrientation.bind(this));
+      };
+
+    Controls.prototype = new EventEmitter2();
+
+     Controls.prototype.onTouch = function(e) {
+        this.emit('jump');
+    };
+
+    Controls.prototype.onKeyDown = function(e) {
+         if (e.keyCode in KEYS && !this.keys[KEYS[e.keyCode]]) {
+            var keyName = KEYS[e.keyCode];
+            this.keys[keyName] = true;
+
+            if (keyName === 'space') {
+                this.emit('jump');
+            }
+            return false;
+
+        }
+    };
+
+    Controls.prototype.onKeyUp = function(e) {
+        if (e.keyCode in KEYS) {
+          var keyName = KEYS[e.keyCode];
+          this.keys[keyName] = false;
+          return false;
+        }
+    };
+
+    Controls.prototype.onFrame = function() {
+        if (this.keys.right) {
+            this.inputVec.x = 1;
+        } else if (this.keys.left) {
+            this.inputVec.x = -1;
+        } else {
+            this.inputVec.x = 0;
+        }
+
+        if (this.inputVec.x === 0) {
+            this.inputVec.x = this.tilt;
+        }
+    };
+
+    Controls.prototype.onOrientation = function(e) {
+        e = e.originalEvent;
+        if (e.gamma == null) {
+            return;
+        }
+
+        var degree = e.gamma;
+
+        if (window.orientation) {
+            var dir = window.orientation / 90;
+            degree = e.beta * dir;
+        }
+
+        var speed = degree / FULL_ANGLE;
+        this.tilt = Math.max(Math.min(speed, 1), -1);
   };
 
-  /**
-   * Controls singleton class.
-   * @constructor
-   */
-  var Controls = function() {
-    this.keys = {};
-
-    $(window)
-      .on('keydown', this.onKeyDown.bind(this))
-      .on('keyup', this.onKeyUp.bind(this));
-  };
-
-  Controls.prototype.onKeyDown = function(e) {
-    if (e.keyCode in KEYS) {
-      var keyName = KEYS[e.keyCode];
-      this.keys[keyName] = true;
-      return false;
-    }
-  };
-
-  Controls.prototype.onKeyUp = function(e) {
-    if (e.keyCode in KEYS) {
-      var keyName = KEYS[e.keyCode];
-      this.keys[keyName] = false;
-      return false;
-    }
-  };
-  // Export singleton.
-  return new Controls();
+    // Export singleton.
+    return new Controls();
 });

@@ -1,6 +1,6 @@
 /*global define, $ */
 
-define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
+define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, Enemy, Controls) {
     'use strict';
     var VIEWPORT_PADDING = 100,
         PLATFORM_WIDHT = 80,
@@ -13,6 +13,7 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
     var Game = function(el) {
         this.el = el;
         this.player = new Player(this.el.find('.player'), this);
+        this.controls = Controls;
         this.entities = [];
         this.platforms = [];
         this.visiblePLatforms = 20;
@@ -43,6 +44,7 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
             delta = now - this.lastFrame;
         this.lastFrame = now;
 
+        this.controls.onFrame(delta);
         this.player.onFrame(delta);
 
         for (var i = 0, e; e = this.entities[i]; i++) {
@@ -73,6 +75,7 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
 
         if (player_y < min_y) {
             this.viewport.y = player_y -  VIEWPORT_PADDING;
+            this.morePlatforms(this.viewport.y);
             this.updateScore();
         }
 
@@ -80,7 +83,6 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
             left: -this.viewport.x,
             top: -this.viewport.y
         });
-        this.morePlatforms(player_y, this.viewport.y);
         this.backgroundEl.css('transform', 'translate3d(' + this.viewport.x + 'px,' + this.viewport.y + 'px,0)');
     };
 
@@ -89,11 +91,11 @@ define(['player', 'platform', 'enemy'], function(Player, Platform, Enemy) {
         this.scoreEl.html('Score: ' + this.score + '!');
     };
 
-    Game.prototype.morePlatforms = function(player_y, min_y) {
+    Game.prototype.morePlatforms = function(viewport_y) {
         var that = this;
         this.forEachPlatform(function(p, i) {
-            if (p.rect.y > min_y + (that.height + 100)) {
-                p.rect.y = min_y - 10;
+            if (p.rect.y > viewport_y + (that.height + 100)) {
+                p.rect.y = viewport_y - 10;
                 p.rect.x = Math.random() * (that.width);
                 p.rect.width = PLATFORM_WIDHT;
                 p.rect.height = p.rect.height;
