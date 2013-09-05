@@ -29,7 +29,7 @@ define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, E
         this.isPlaying = false;
         // Cache a bound onFrame since we need it each frame.
         this.onFrame = this.onFrame.bind(this);
-
+        console.log(this.el);
     };
 
   /**
@@ -122,12 +122,8 @@ define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, E
 
     Game.prototype.gameOver = function () {
         this.freezeGame();
-        alert('You are game over! Sorry man....');
-        var game = this;
+        this.showGameOverMenu();
 
-        setTimeout(function () {
-            game.start();
-        }, 1);
     };
 
     /**
@@ -136,7 +132,6 @@ define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, E
     Game.prototype.unFreezeGame = function () {
         if (!this.isPlaying) {
             this.isPlaying = true;
-
             this.lastFrame = +new Date() / 1000;
             requestAnimFrame(this.onFrame);
         }
@@ -147,6 +142,10 @@ define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, E
    */
     Game.prototype.start = function() {
         // Restart the onFrame loop
+        this.hideMenu();
+        this.hideGameOverMenu();
+
+
         this.score = 0;
         this.scoreEl.html('Score: 0');
         this.player.reset();
@@ -208,6 +207,29 @@ define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, E
         this.platforms.push(platform);
         this.platformsEl.append(platform.el);
     };
+
+
+    Game.prototype.hideMenu  = function() {
+        var menu = document.getElementById('mainMenu');
+        console.log(menu);
+        menu.style.zIndex = '-1';
+        menu.style.visibility = 'hidden';
+    }
+
+    Game.prototype.showGameOverMenu = function() {
+        var menu = document.getElementById('gameOverMenu');
+        menu.style.zIndex = '1';
+        menu.style.visibility = 'visible';
+
+        var scoreText = document.getElementById('yourScore');
+        scoreText.innerHTML = 'You scored ' + this.score + ' points!';
+    }
+
+    Game.prototype.hideGameOverMenu = function() {
+        var men = document.getElementById('gameOverMenu');
+        men.style.zIndex = '-1';
+        men.style.visibility = 'hidden';
+    }
 
   /**
    * Cross browser RequestAnimationFrame

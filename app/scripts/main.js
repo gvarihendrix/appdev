@@ -14,5 +14,8 @@ require.config({
 require(['game', 'jquery'], function (Game, $) {
     'use strict';
     var game = new Game($('.game'));
-    game.start();
+
+    $('.button').on('click', function() {
+        game.start();
+    });
 });
