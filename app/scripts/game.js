@@ -208,6 +208,12 @@ define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, E
         this.platformsEl.append(platform.el);
     };
 
+    Game.prototype.showMenu = function() {
+        this.hideGameOverMenu();
+        var menu = document.getElementById('mainMenu');
+        menu.style.zIndex = '1';
+        menu.style.visibility = 'visible';
+    }
 
     Game.prototype.hideMenu  = function() {
         var menu = document.getElementById('mainMenu');
@@ -217,6 +223,7 @@ define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, E
     }
 
     Game.prototype.showGameOverMenu = function() {
+        this.hideMenu();
         var menu = document.getElementById('gameOverMenu');
         menu.style.zIndex = '1';
         menu.style.visibility = 'visible';
