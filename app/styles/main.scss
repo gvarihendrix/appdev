@@ -1,6 +1,9 @@
 @import "compass/css3";
 @import "_animation";
 
+body {
+  font-family: "monospace", serif;
+}
 
 .game {
   left: 50%;
@@ -52,7 +55,7 @@
 }
 
 #yourScore {
-  font-size: 40px;
+  font-size: 30px;
 }
 
 
@@ -84,8 +87,10 @@ h3 a {color: #5a5816}
   background: url(http://i.imgur.com/2WEhF.png) 0 0 no-repeat;
   display: block;
   color:  #000;
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: bold;
   line-height: 31px;
+  text-align: center;
   text-decoration: none;
   position: absolute;
   left: 50%;
