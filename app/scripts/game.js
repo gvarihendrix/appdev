@@ -29,7 +29,6 @@ define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, E
         this.isPlaying = false;
         // Cache a bound onFrame since we need it each frame.
         this.onFrame = this.onFrame.bind(this);
-        console.log(this.el);
     };
 
   /**
@@ -94,8 +93,8 @@ define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, E
     Game.prototype.morePlatforms = function(viewport_y) {
         var that = this;
         this.forEachPlatform(function(p, i) {
-            if (p.rect.y > viewport_y + (that.height + 100)) {
-                p.rect.y = viewport_y - 10;
+            if (p.rect.y > viewport_y + (that.height + 10)) {
+                p.rect.y = viewport_y - (100 * Math.random());
                 p.rect.x = Math.random() * (that.width);
                 p.rect.width = PLATFORM_WIDHT;
                 p.rect.height = p.rect.height;
@@ -123,7 +122,12 @@ define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, E
     Game.prototype.gameOver = function () {
         this.freezeGame();
         this.showGameOverMenu();
+        this.backgroundEl.css({
+            visibility: 'hidden'
+        });
 
+        this.entities.forEach(function(e) { e.el.remove(); });
+        this.platforms.forEach(function(p) { p.el.remove(); });
     };
 
     /**
@@ -145,12 +149,13 @@ define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, E
         this.hideMenu();
         this.hideGameOverMenu();
 
+        this.backgroundEl.css({
+            visibility:'visible'
+        })
 
         this.score = 0;
         this.scoreEl.html('Score: 0');
         this.player.reset();
-        this.entities.forEach(function(e) { e.el.remove(); });
-        this.platforms.forEach(function(p) { p.el.remove(); });
         this.platforms = [];
         this.entities = [];
         this.viewport = {x: 100, y: 0 , width: this.width, height: this.height };

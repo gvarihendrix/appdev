@@ -33,7 +33,7 @@ define(['controls'], function(controls) {
     };
 
     Player.prototype.checkGameOver = function() {
-        if (this.pos.y > this.game.viewport.y + this.game.height + 20) {
+        if (this.pos.y > this.game.viewport.y + this.game.height + 100) {
             this.game.gameOver();
         }
     };
