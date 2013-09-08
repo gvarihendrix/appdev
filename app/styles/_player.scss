@@ -13,28 +13,3 @@
 
 }
 
-.left {
-  background-position: 0px -200px;
-}
-
-.right {
-  background-position: -30px -120px;
-}
-
-@include keyframes(player-walk-left) {
-  from {
-    @include transform(rotate(0));
-  }
-  to {
-    @include transform(rotate(30deg));
-  }
-}
-
-@include keyframes(player-walk-right) {
-  from {
-    @include transform(rotate(0));
-  }
-  to {
-    @include transform(rotate(-30deg));
-  }
-}
