@@ -16,7 +16,7 @@ define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, E
         this.controls = Controls;
         this.entities = [];
         this.platforms = [];
-        this.visiblePLatforms = 20;
+        this.visiblePLatforms = 14;
         this.elevation = 0;
         this.score = 0;
         this.backgroundEl = el.find('.background');
@@ -27,6 +27,7 @@ define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, E
         this.width = this.el.width();
         this.height = this.el.height();
         this.isPlaying = false;
+        console.log(this.height + ' ' + this.width);
         // Cache a bound onFrame since we need it each frame.
         this.onFrame = this.onFrame.bind(this);
     };
@@ -181,7 +182,7 @@ define(['player', 'platform', 'enemy', 'controls'], function(Player, Platform, E
         for (var i = 0; i < this.visiblePLatforms; i += 1) {
             this.addPlatform(new Platform({
                 x: Math.random() * (this.viewport.width) + 100,
-                y: ((Math.random()) * (this.viewport.height - 1)) - 100,
+                y: (Math.random() * this.viewport.height) - 100,
                 width: PLATFORM_WIDHT,
                 height: 12
             }));
