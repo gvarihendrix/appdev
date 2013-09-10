@@ -8,8 +8,8 @@ body {
 .game {
   left: 50%;
   top: 50%;
-  width: 600px;
-  height: 500px;
+  width: 400px;
+  height: 600px;
   margin-left: -400px;
   margin-top: -300px;
   overflow: hidden;
@@ -20,7 +20,7 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 600px;
+  width: 400px;
   height: 5000px;
 }
 
@@ -32,26 +32,28 @@ body {
   visibility: hidden;
 }
 
-.enemy {
-  position: absolute;
-  height: 75px;
-  width: 65px;
-  left: 0;
-  top: 0;
-  background: url('http://pulsaro.com/wp-content/uploads/2012/04/enemy-concept.jpg') 50% 50% / contain no-repeat;
-}
-
-
 #score {
   position: absolute;
   height: 50px;
-  width: 100px;
-  left: 85%;
+  width: 75px;
+  left: 75%;
   top: 10px;
   font-style: bold;
-  font-size: 1.3em;
+  font-size: 1.2em;
   font-family: "monospace", serif;
+  z-index: 9999;
+}
 
+#hiScore {
+  position: absolute;
+  height: 50px;
+  width: 75px;
+  left: 5%;
+  top: 10px;
+  font-style: bold;
+  font-size: 1.2em;
+  font-family: "monospace", serif;
+  z-index: 9999;
 }
 
 #yourScore {

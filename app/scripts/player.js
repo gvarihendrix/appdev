@@ -116,7 +116,6 @@ define(['controls'], function(controls) {
         this.pos.y += delta * this.vel.y;
 
         this.checkPlatforms(oldY);
-        this.checkEnemies();
         this.checkGameOver();
         this.checkOutOfBounds();
 

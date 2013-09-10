@@ -18,4 +18,9 @@ require(['game', 'jquery'], function (Game, $) {
     $('.button').on('click', function() {
         game.start();
     });
+
+    $('.button').on('touchstart', function() {
+        game.start();
+    });
+
 });
