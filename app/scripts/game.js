@@ -15,7 +15,7 @@ define(['player', 'platform', 'controls'], function(Player, Platform, Controls) 
         this.player = new Player(this.el.find('.player'), this);
         this.controls = Controls;
         this.platforms = [];
-        this.visiblePLatforms = 8;
+        this.visiblePLatforms = 6;
         this.elevation = 0;
         this.score = 0;
         this.currentHighScore = 0;
@@ -91,10 +91,9 @@ define(['player', 'platform', 'controls'], function(Player, Platform, Controls) 
     };
 
     Game.prototype.updatePlatform = function(p, i, viewport_y) {
-        p.rect.y = viewport_y - (100 * Math.random());
-        var x = Math.random() * (this.width - PLATFORM_WIDHT);
-        console.log(x);
-        p.rect.x = x < 100 ? x + 100 : x;
+        p.rect.y = viewport_y - (50 * Math.random());
+        var x = Math.random() * (this.width + PLATFORM_WIDHT);
+        p.rect.x = x < 100 ? x + 150 : x;
         p.rect.width = PLATFORM_WIDHT;
         p.rect.height = p.rect.height;
         p.rect.right = p.rect.x + p.rect.width;
@@ -195,17 +194,33 @@ define(['player', 'platform', 'controls'], function(Player, Platform, Controls) 
             x: 100,
             y: 418,
             width: 1500,
+            height: 12
+        }));
+
+
+        this.addPlatform(new Platform({
+            x: 300,
+            y: 278,
+            width: PLATFORM_WIDHT,
+            height: 12
+        }));
+
+
+        this.addPlatform(new Platform({
+            x: 400,
+            y: 149,
+            width: 1500,
             height: 10
         }));
 
 
         // TODO: need to implement a better algorithm
         for (var i = 0; i < this.visiblePLatforms; i += 1) {
-            ble_x = Math.random() * (this.viewport.width - PLATFORM_WIDHT);
+            ble_x = Math.random() * (this.viewport.width + PLATFORM_WIDHT);
             ble_x = ble_x < 100 ? ble_x + 100 : ble_x;
             this.addPlatform(new Platform({
                 x: ble_x,
-                y: (Math.random() * (this.viewport.height + i * 10)) - 250,
+                y: (Math.random() * (this.viewport.height + i * 10)) - 200,
                 width: PLATFORM_WIDHT,
                 height: 12
             }));
